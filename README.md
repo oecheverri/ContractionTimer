@@ -1,2 +1,4 @@
 # ContractionTimer
-An app to time my wife's contractions when she goes into labour
+
+
+An app for iOS to time and analyze my wife's contractions when she goes into labour
