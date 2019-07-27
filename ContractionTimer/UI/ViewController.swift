@@ -8,16 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController, ContractionListener {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, ContractionListener {
+
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timerLabel: UILabel!
+
+    @IBOutlet weak var contractionButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var timer: Timer?
+    var contractionTimer: ContractionTimer?
     
     var isContracting = false {
         didSet {
-            contractionButton.setTitle( isContracting ? NSLocalizedString("End Contraction", comment: "The end of a contraction has been reached") : NSLocalizedString("Start Contraction", comment: "The start of a contraction has been reached"), for: .normal)
+            contractionButton.setTitle( isContracting ? NSLocalizedString("End", comment: "The end of a contraction has been reached") : NSLocalizedString("Start", comment: "The start of a contraction has been reached"), for: .normal)
+            
+            cancelButton.isHidden = !isContracting
+            
             titleLabel.text = isContracting ? NSLocalizedString("Current Contraction", comment: "Current contraction") : NSLocalizedString("Since Last Contraction", comment: "Time since last contraction")
-            
-            
             if isContracting {
                 let pulseAnimation = CABasicAnimation(keyPath: "opacity")
                 pulseAnimation.duration = 1
@@ -34,13 +45,7 @@ class ViewController: UIViewController, ContractionListener {
             
         }
     }
-    
-    @IBOutlet weak var timerLabel: UILabel!
-    @IBOutlet weak var contractionButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    
-    var contractionTimer: ContractionTimer?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         contractionTimer = ContractionTimer(listeningWith: self)
@@ -48,45 +53,55 @@ class ViewController: UIViewController, ContractionListener {
         timer = Timer.scheduledTimer(withTimeInterval: 0.042, repeats: true) { _ in
             self.UpdateLabels()
         }
+        isContracting = contractionTimer?.isContracting ?? false
+    }
+    @IBAction func onCanceButtonPushed(_ sender: UIButton) {
+        contractionTimer?.cancelContraction()
+        tableView.reloadData()
     }
     
     @IBAction func OnContractionButtonClicked(_ sender: Any) {
         contractionTimer?.toggle()
+        tableView.reloadData()
     }
     
     func UpdateLabels() {
         if isContracting {
-            timerLabel.text = CalculateTimerString(for: contractionTimer!.lengthOfCurrentContraction)
+            timerLabel.text = contractionTimer!.lengthOfCurrentContraction.DisplayableString()
         } else {
-            timerLabel.text = CalculateTimerString(for: contractionTimer!.timeSinceLastContraction)
+            timerLabel.text = contractionTimer!.timeSinceEndOfLastContraction.DisplayableString()
         }
     }
     
-    func CalculateTimerString(for interval: TimeInterval) -> String {
-        let minutes = Int(interval / 60)
-        let seconds = Int(interval - (TimeInterval(minutes) * 60))
-        let milliseconds = Int((interval.truncate(places: 3) - (TimeInterval(minutes) * 60) - TimeInterval(seconds)) * 1000)
-        let minutesString = minutes < 10 ? "0\(minutes)" : "\(minutes)"
-        let secondsString = seconds < 10 ? "0\(seconds)" : "\(seconds)"
-        let millisecondString: String
-        if milliseconds == 0 {
-            millisecondString = "000"
-        } else if (milliseconds < 10) {
-            millisecondString = "00\(milliseconds)"
-        } else if (milliseconds < 100) {
-            millisecondString = "0\(milliseconds)"
-        } else {
-            millisecondString = "\(milliseconds)"
-        }
-        return "\(minutesString):\(secondsString).\(millisecondString)"
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StatCell", for: indexPath) as! StatViewTableCell
+        let currentStat = contractionTimer!.statistics[indexPath.row]
+        let value = contractionTimer!.getValue(forStatistic: currentStat)
+        cell.set(title: currentStat.localizedName, value: value)
+        
+        return cell
     }
-
-}
-
-extension TimeInterval
-{
-    func truncate(places : Int)-> Double
-    {
-        return Double(floor(pow(10.0, Double(places)) * self)/pow(10.0, Double(places)))
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return contractionTimer?.statistics.count ?? 0
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.backgroundColor = UIColor.black
+        self.tableView.backgroundColor = UIColor.black
+        self.navigationController?.navigationBar.barStyle = .black
+        self.navigationController?.view.backgroundColor = UIColor.black
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let statCell = cell as! StatViewTableCell
+        
+        statCell.backgroundColor = UIColor.black
+        statCell.titleLabel.textColor = UIColor.white
+        statCell.valueLabel.textColor = UIColor.white
+        cell.backgroundColor = UIColor.black
+    }
+    
 }

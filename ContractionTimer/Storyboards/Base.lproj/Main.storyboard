@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,26 +22,58 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tlg-DG-hOi">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xWL-3C-2Zd">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="oWY-0E-wl3">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="409"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GJW-bB-2zw">
-                                            <size key="itemSize" width="100" height="99"/>
-                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" id="tyB-EF-zKZ">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="99"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="99"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="StatCell" id="GQA-ij-GgR" customClass="StatViewTableCell" customModule="ContractionTimer" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="55.5" width="414" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GQA-ij-GgR" id="JNr-jq-JoO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                </view>
-                                            </collectionViewCell>
-                                        </cells>
-                                    </collectionView>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="MX2-aC-8ya">
+                                                            <rect key="frame" x="25" y="7.5" width="364" height="29.5"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lii-KX-o9t">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="178" height="29.5"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:00.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WTc-zt-IdW">
+                                                                    <rect key="frame" x="186" y="0.0" width="178" height="29.5"/>
+                                                                    <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="25"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="WTc-zt-IdW" firstAttribute="width" secondItem="Lii-KX-o9t" secondAttribute="width" id="HyW-cq-SJe"/>
+                                                            </constraints>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="MX2-aC-8ya" firstAttribute="centerX" secondItem="JNr-jq-JoO" secondAttribute="centerX" id="xWo-k0-wyb"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="MX2-aC-8ya" firstAttribute="centerY" secondItem="GQA-ij-GgR" secondAttribute="centerY" id="Fmz-pX-WU8"/>
+                                                    <constraint firstItem="MX2-aC-8ya" firstAttribute="width" secondItem="GQA-ij-GgR" secondAttribute="width" constant="-50" id="Pw2-yt-N7x"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="titleLabel" destination="Lii-KX-o9t" id="Yk0-Yi-c4G"/>
+                                                    <outlet property="valueLabel" destination="WTc-zt-IdW" id="yGj-3G-5xI"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="c8F-oQ-n6T"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="Gmg-pV-hfB"/>
+                                        </connections>
+                                    </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="dWN-ng-3uc">
                                         <rect key="frame" x="0.0" y="409" width="414" height="409"/>
                                         <subviews>
@@ -56,20 +89,40 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePQ-Om-44X">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uFf-lX-wwC">
                                                 <rect key="frame" x="0.0" y="92" width="414" height="317"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                <state key="normal" title="Start"/>
-                                                <connections>
-                                                    <action selector="OnContractionButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mNN-FQ-KGS"/>
-                                                </connections>
-                                            </button>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ePQ-Om-44X">
+                                                        <rect key="frame" x="0.0" y="0.0" width="207" height="317"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        <state key="normal" title="Start"/>
+                                                        <connections>
+                                                            <action selector="OnContractionButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mNN-FQ-KGS"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A16-XW-htZ">
+                                                        <rect key="frame" x="207" y="0.0" width="207" height="317"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                        <state key="normal" title="Cancel">
+                                                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="onCanceButtonPushed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2wE-2i-aQO"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="A16-XW-htZ" firstAttribute="width" secondItem="ePQ-Om-44X" secondAttribute="width" id="7iw-c5-xNS"/>
+                                                </constraints>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstItem="oWY-0E-wl3" firstAttribute="centerX" secondItem="tlg-DG-hOi" secondAttribute="centerX" id="OaD-fG-QVX"/>
                                     <constraint firstItem="dWN-ng-3uc" firstAttribute="height" secondItem="tlg-DG-hOi" secondAttribute="height" multiplier="0.5" id="Obz-mN-mja"/>
+                                    <constraint firstItem="oWY-0E-wl3" firstAttribute="height" secondItem="dWN-ng-3uc" secondAttribute="height" id="ucc-AW-GxR"/>
                                     <constraint firstItem="dWN-ng-3uc" firstAttribute="width" secondItem="tlg-DG-hOi" secondAttribute="width" id="wMS-L2-exM"/>
                                 </constraints>
                             </stackView>
@@ -84,7 +137,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="A16-XW-htZ" id="wgM-fU-H5d"/>
                         <outlet property="contractionButton" destination="ePQ-Om-44X" id="533-us-xAb"/>
+                        <outlet property="tableView" destination="oWY-0E-wl3" id="U6V-lB-Cso"/>
                         <outlet property="timerLabel" destination="Aoy-vU-gnE" id="PPO-tf-fvg"/>
                         <outlet property="titleLabel" destination="YBj-xT-wZq" id="YYd-Il-d8r"/>
                     </connections>
