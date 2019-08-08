@@ -40,19 +40,7 @@ class ContractionTableViewController: UITableViewController {
         }
 
         let contraction = Contraction.getContractions()[indexPath.row]
-        let dateFormatter = DateFormatter()
-        dateFormatter.setLocalizedDateFormatFromTemplate("dd-MMM @ hh:mm:ss")
-        
-        cell.start = dateFormatter.string(from: contraction.start)
-        cell.intensity = String(round(contraction.intensity * 10)/10)
-        
-        if contraction.end == Date.distantFuture {
-            cell.end = NSLocalizedString("Current Contraction", comment: "Current Contraction")
-            cell.duration = NSLocalizedString("N/A", comment: "Not applicable abbrevation")
-        } else {
-            cell.end = dateFormatter.string(from: contraction.end)
-            cell.duration = contraction.end.timeIntervalSince(contraction.start).DisplayableString()
-        }
+        cell.contraction = contraction
         
         return cell
     }
@@ -80,6 +68,10 @@ class ContractionTableViewController: UITableViewController {
             let contraction = contractions[indexPath.row]
             return contraction.end != Date.distantFuture
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
     }
     
     /*

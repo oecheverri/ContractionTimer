@@ -240,7 +240,7 @@
                                     <constraint firstItem="31G-I3-fUm" firstAttribute="centerX" secondItem="nac-4h-21B" secondAttribute="centerX" id="vcA-cV-TJJ"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <integer key="value" value="9"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
