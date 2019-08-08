@@ -12,6 +12,8 @@ import os.log
 
 class ContractionTimer {
     
+    static var shared = ContractionTimer()
+    
     enum Statistics: CaseIterable {
         case AverageDuration
         case ContractionPeriod
@@ -31,37 +33,40 @@ class ContractionTimer {
             }
         }
     }
-    var latestContraction: Contraction? = nil
+    
+    var latestContraction: Contraction? {
+        let contractions = Contraction.getContractions()
+        
+        if !contractions.isEmpty {
+            return contractions[contractions.count - 1]
+        }
+        
+        return nil
+    }
+    
     var statistics: [Statistics] {
         return Statistics.allCases
     }
-    var contractionListener: ContractionListener
     
-    init(listeningWith contractionListener: ContractionListener) {
-        self.contractionListener = contractionListener
-        let contractions = Contraction.getContractions()
-        if !contractions.isEmpty {
-            latestContraction = contractions[0]
-        }
-    }
+    var contractionListener: ContractionListener?
     
     var lastContractionStartTime: Date {
         return latestContraction?.start ?? Date.distantPast
     }
     
-    var lengthOfPreviousContraction: TimeInterval {
+    var lengthOfPreviousContraction: TimeInterval? {
         if isContracting {
             let contractions = Contraction.getContractions()
             if contractions.count > 1 {
                 return contractions[contractions.count - 2].length
             } else {
-                return 0
+                return nil
             }
         } else {
             return lengthOfCurrentContraction
         }
     }
-    var lengthOfCurrentContraction: TimeInterval {
+    var lengthOfCurrentContraction: TimeInterval? {
         if let latestContraction = self.latestContraction {
             if latestContraction.end == Date.distantFuture {
                 return Date().timeIntervalSince(latestContraction.start)
@@ -69,7 +74,7 @@ class ContractionTimer {
                 return latestContraction.end.timeIntervalSince(latestContraction.start)
             }
         } else {
-            return 0
+            return nil
         }
     }
     
@@ -87,23 +92,35 @@ class ContractionTimer {
     
     func toggle() {
         if latestContraction == nil || latestContraction?.end != Date.distantFuture {
-            latestContraction = Contraction(startTime: Date(), length: 0, intensity: 0)
-            latestContraction?.end = Date.distantFuture
+            let newContraction = Contraction(startTime: Date(), length: 0, intensity: 0)
+            newContraction.end = Date.distantFuture
         } else {
             latestContraction?.end = Date()
         }
-        contractionListener.isContracting = isContracting
+        
+        if var listener = contractionListener {
+            listener.isContracting = isContracting
+        }
+        
     }
     
     func getValue(forStatistic statistic: Statistics) -> String {
         switch (statistic) {
         case .AverageDuration:
-            return Contraction.averageContractionLengthOver(last: 1, units: .hour).DisplayableString()
+            guard let value = Contraction.averageContractionLengthOver(last: 1, units: .hour) else {
+                return NSLocalizedString("N/A", comment: "Not Applicable")
+            }
+            return value.DisplayableString()
         case .LastContractionLength:
-            return lengthOfPreviousContraction.DisplayableString()
+            guard let value = lengthOfPreviousContraction else {
+                return NSLocalizedString("N/A", comment: "Not Applicable")
+            }
+            return value.DisplayableString()
         case .ContractionPeriod:
-            let contractionIntervals = Contraction.averageContractionPeriodOver(last: 1, units: .hour)
-            return contractionIntervals.DisplayableString()
+            guard let value = Contraction.averageContractionPeriodOver(last: 1, units: .hour) else {
+                return NSLocalizedString("N/A", comment: "Not Applicable")
+            }
+            return value.DisplayableString()
         case .NumberOfContractions:
             return String(Contraction.getContractions().count)
         }
@@ -112,15 +129,11 @@ class ContractionTimer {
     func cancelContraction() {
         if isContracting {
             Contraction.delete(contraction: latestContraction!)
-            let allContractions = Contraction.getContractions()
             
-            if !allContractions.isEmpty {
-                latestContraction = allContractions[0]
-            } else {
-                latestContraction = nil
+            if var listener = contractionListener {
+                listener.isContracting = isContracting
             }
             
-            contractionListener.isContracting = isContracting
         }
     }
     

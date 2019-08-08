@@ -20,6 +20,11 @@ class Contraction {
             let context = DataManager.shared.backgroundContext
             context.perform {
                 self.priv.start = self.start as NSDate
+                do {
+                    try context.save()
+                } catch {
+                    os_log(.error, log: OSLog.data, "Error saving change to start date: %{public}@", error.localizedDescription)
+                }
             }
         }
     }
@@ -29,6 +34,11 @@ class Contraction {
             let context = DataManager.shared.backgroundContext
             context.perform {
                 self.priv.end = self.end as NSDate
+                do {
+                    try context.save()
+                } catch {
+                    os_log(.error, log: OSLog.data, "Error saving change to end date: %{public}@", error.localizedDescription)
+                }
             }
         }
     }
@@ -38,6 +48,11 @@ class Contraction {
             let context = DataManager.shared.backgroundContext
             context.perform {
                 self.priv.intensity = self.intensity
+                do {
+                    try context.save()
+                } catch {
+                    os_log(.error, log: OSLog.data, "Error saving change to intensity: %{public}@", error.localizedDescription)
+                }
             }
         }
     }
@@ -113,14 +128,14 @@ class Contraction {
         return contractions
     }
     
-    class func averageContractionLengthOver(last scalar: Double, units: TimeInterval.TimeUnits) -> TimeInterval {
+    class func averageContractionLengthOver(last scalar: Double, units: TimeInterval.TimeUnits) -> TimeInterval? {
         let startDate = Date()
         let total: TimeInterval = units.rawValue * scalar
         
         let contractions = getContractions(start: startDate, interval: total)
         
         if contractions.isEmpty {
-            return 0
+            return nil
         } else {
             var totalLength: TimeInterval = 0.0
             var countedContractions = 0
@@ -130,20 +145,20 @@ class Contraction {
                     countedContractions += 1
                 }
             }
-            let averageLength = countedContractions > 0 ? totalLength / Double(countedContractions) : 0
+            let averageLength = countedContractions > 0 ? totalLength / Double(countedContractions) : nil
             return averageLength
         }
     }
     
-    class func averageContractionPeriodOver(last scalar: Double, units: TimeInterval.TimeUnits) -> TimeInterval {
+    class func averageContractionPeriodOver(last scalar: Double, units: TimeInterval.TimeUnits) -> TimeInterval? {
         let startDate = Date()
         let total: TimeInterval = units.rawValue * scalar
         
         let contractions = getContractions(start: startDate, interval: total)
         var contractionIntervals = [TimeInterval]()
         
-        if contractions.isEmpty {
-            return 0
+        if contractions.isEmpty || contractions.count == 1 {
+            return nil
         } else {
             
             for (index, currentContraction) in contractions.enumerated() {
@@ -161,7 +176,7 @@ class Contraction {
                 let averageInterval = totalTimeBetween / Double(contractionIntervals.count)
                 return averageInterval
             } else {
-                return 0
+                return nil
             }
         }
     }
@@ -170,6 +185,12 @@ class Contraction {
         let backgroundContext = DataManager.shared.backgroundContext
         backgroundContext.performAndWait {
             backgroundContext.delete(contraction.priv)
+            
+            do {
+                try backgroundContext.save()
+            } catch {
+                os_log(.error, log: OSLog.data, "Error deleting contraction: %{public}@", error.localizedDescription)
+            }
         }
     }
 }

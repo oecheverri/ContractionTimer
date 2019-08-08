@@ -11,8 +11,6 @@ class DataManager {
     
     static var shared = DataManager()
     
-    
-    
     private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {

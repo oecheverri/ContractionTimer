@@ -9,10 +9,12 @@
 /* Begin PBXBuildFile section */
 		F622722F22D5717600A3F291 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F622722E22D5717600A3F291 /* DataManager.swift */; };
 		F622723222D57EB400A3F291 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F622723122D57EB400A3F291 /* Logger.swift */; };
+		F627D0F322FBC39E0031F064 /* ContractionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627D0F122FBC39E0031F064 /* ContractionTableViewCell.swift */; };
+		F627D0F422FBC39E0031F064 /* ContractionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F627D0F222FBC39E0031F064 /* ContractionTableViewCell.xib */; };
 		F6287E0522D6016600685AFB /* ContractionTimer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F6287E0322D6016600685AFB /* ContractionTimer.xcdatamodeld */; };
 		F6287E0722D601F700685AFB /* Contraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6287E0622D601F700685AFB /* Contraction.swift */; };
 		F667036B22D2335F0023E742 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667036A22D2335F0023E742 /* AppDelegate.swift */; };
-		F667036D22D2335F0023E742 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667036C22D2335F0023E742 /* ViewController.swift */; };
+		F667036D22D2335F0023E742 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F667036C22D2335F0023E742 /* MainViewController.swift */; };
 		F667037022D2335F0023E742 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F667036E22D2335F0023E742 /* Main.storyboard */; };
 		F667037522D233610023E742 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F667037422D233610023E742 /* Assets.xcassets */; };
 		F667037822D233610023E742 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F667037622D233610023E742 /* LaunchScreen.storyboard */; };
@@ -20,16 +22,21 @@
 		F6743A9922DD58F7000BC147 /* ContractionPriv+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6743A9722DD58F7000BC147 /* ContractionPriv+CoreDataClass.swift */; };
 		F6743A9A22DD58F7000BC147 /* ContractionPriv+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6743A9822DD58F7000BC147 /* ContractionPriv+CoreDataProperties.swift */; };
 		F684CC4E22D42670007355E1 /* ContractionTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F684CC4D22D42670007355E1 /* ContractionTimer.swift */; };
+		F6AEE15F22FBB1E100163E1D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6AEE15E22FBB1E100163E1D /* QuartzCore.framework */; };
+		F6FB8BF622ECFD6600BDD5DF /* ContractionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FB8BF522ECFD6600BDD5DF /* ContractionTableViewController.swift */; };
+		F6FB8BF822ED4ACB00BDD5DF /* SaveContractionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6FB8BF722ED4ACB00BDD5DF /* SaveContractionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		F622722E22D5717600A3F291 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		F622723122D57EB400A3F291 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		F627D0F122FBC39E0031F064 /* ContractionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTableViewCell.swift; sourceTree = "<group>"; };
+		F627D0F222FBC39E0031F064 /* ContractionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractionTableViewCell.xib; sourceTree = "<group>"; };
 		F6287E0422D6016600685AFB /* ContractionTimer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContractionTimer.xcdatamodel; sourceTree = "<group>"; };
 		F6287E0622D601F700685AFB /* Contraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contraction.swift; sourceTree = "<group>"; };
 		F667036722D2335F0023E742 /* ContractionTimer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContractionTimer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F667036A22D2335F0023E742 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F667036C22D2335F0023E742 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F667036C22D2335F0023E742 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F667036F22D2335F0023E742 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F667037422D233610023E742 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F667037722D233610023E742 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -38,6 +45,9 @@
 		F6743A9722DD58F7000BC147 /* ContractionPriv+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContractionPriv+CoreDataClass.swift"; sourceTree = "<group>"; };
 		F6743A9822DD58F7000BC147 /* ContractionPriv+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContractionPriv+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		F684CC4D22D42670007355E1 /* ContractionTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimer.swift; sourceTree = "<group>"; };
+		F6AEE15E22FBB1E100163E1D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		F6FB8BF522ECFD6600BDD5DF /* ContractionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractionTableViewController.swift; sourceTree = "<group>"; };
+		F6FB8BF722ED4ACB00BDD5DF /* SaveContractionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveContractionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6AEE15F22FBB1E100163E1D /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +75,7 @@
 			children = (
 				F667036922D2335F0023E742 /* ContractionTimer */,
 				F667036822D2335F0023E742 /* Products */,
+				F6AEE15D22FBB1E100163E1D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,8 +124,12 @@
 		F667038122D234580023E742 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				F667036C22D2335F0023E742 /* ViewController.swift */,
+				F6FB8BF522ECFD6600BDD5DF /* ContractionTableViewController.swift */,
+				F667036C22D2335F0023E742 /* MainViewController.swift */,
 				F6743A9122DD4FE2000BC147 /* StatViewTableCell.swift */,
+				F6FB8BF722ED4ACB00BDD5DF /* SaveContractionViewController.swift */,
+				F627D0F122FBC39E0031F064 /* ContractionTableViewCell.swift */,
+				F627D0F222FBC39E0031F064 /* ContractionTableViewCell.xib */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -134,6 +150,14 @@
 				F6287E0622D601F700685AFB /* Contraction.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		F6AEE15D22FBB1E100163E1D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6AEE15E22FBB1E100163E1D /* QuartzCore.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F627D0F422FBC39E0031F064 /* ContractionTableViewCell.xib in Resources */,
 				F667037822D233610023E742 /* LaunchScreen.storyboard in Resources */,
 				F667037522D233610023E742 /* Assets.xcassets in Resources */,
 				F667037022D2335F0023E742 /* Main.storyboard in Resources */,
@@ -207,15 +232,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F667036D22D2335F0023E742 /* ViewController.swift in Sources */,
+				F667036D22D2335F0023E742 /* MainViewController.swift in Sources */,
 				F6743A9222DD4FE2000BC147 /* StatViewTableCell.swift in Sources */,
 				F622723222D57EB400A3F291 /* Logger.swift in Sources */,
 				F6287E0722D601F700685AFB /* Contraction.swift in Sources */,
 				F6287E0522D6016600685AFB /* ContractionTimer.xcdatamodeld in Sources */,
+				F6FB8BF622ECFD6600BDD5DF /* ContractionTableViewController.swift in Sources */,
 				F622722F22D5717600A3F291 /* DataManager.swift in Sources */,
 				F684CC4E22D42670007355E1 /* ContractionTimer.swift in Sources */,
 				F667036B22D2335F0023E742 /* AppDelegate.swift in Sources */,
+				F6FB8BF822ED4ACB00BDD5DF /* SaveContractionViewController.swift in Sources */,
 				F6743A9922DD58F7000BC147 /* ContractionPriv+CoreDataClass.swift in Sources */,
+				F627D0F322FBC39E0031F064 /* ContractionTableViewCell.swift in Sources */,
 				F6743A9A22DD58F7000BC147 /* ContractionPriv+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
